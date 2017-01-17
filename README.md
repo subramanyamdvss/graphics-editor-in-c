@@ -4,5 +4,5 @@
 	
   dependencies required:
   
-  	you need a linux based operating system with graphics.h installed using SDL follow [these](http://askubuntu.com/questions/525051/how-do-i-use-graphics-h-in-ubuntu) instructions 
+  	you need a linux based operating system with graphics.h installed using SDL . Follow  instructions in this link http://askubuntu.com/questions/525051/how-do-i-use-graphics-h-in-ubuntu 
 	
