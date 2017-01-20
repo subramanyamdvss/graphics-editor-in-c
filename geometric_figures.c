@@ -1,47 +1,29 @@
-/*#include<graphics.h>
 
-main()
-{
-   int gd = DETECT, gm;
-   initgraph(&gd, &gm, "C:\\TC\\BGI");
- 
-   outtext("Press any key to change the background color to GREEN.");
-   getch();
- 
-   setbkcolor(GREEN);
- 
-   getch();
-   closegraph();
-   return 0;
-}*/
-/*   #include<graphics.h>
- 
-main()
-{
-   int gd = DETECT, gm;
-   initgraph(&gd,&gm,"C:\\TC\\BGI");
- 
-   circle(100,100,50);           
-   setcolor(RED);
-   circle(200,200,50);          
- 
-   getch();
-   closegraph();
-   return 0;
-}
-*/
+#include <stdio.h>
+#include <stdlib.h>
 #include <graphics.h>
- 
 
-void main(){
-   int x=50,int y=60,int l=90,int b=100,int fc=,int bkc;
-   int gd = DETECT, gm;
-   
+int main()
+{
+   int gd=DETECT,gm,sumx=0,sumy=0,i;
+   int n=3; int points[]={1,2,56,57,89,69,1,2};int fc=1;int bkc=4;
    initgraph(&gd, &gm, "C:\\TC\\BGI");
+ 
+   
    setbkcolor(bkc);
    setcolor(fc);
-   rectangle(x,y,l,b);
-   floodfill(100,100,fc);
+   drawpoly(n, points);
+
+   for(i=0;i<2*n-1;i+=2){
+      sumx+=points[i];
+      sumy+=points[i+1];
+   }
+   sumx/=n;
+   printf("%d ",sumx);
+   sumy/=n;
+   printf("%d \n",sumy);
+
+   floodfill(sumx/2,sumy/2,fc);
    getch();
    closegraph();
    return ;

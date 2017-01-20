@@ -1,7 +1,7 @@
-rectangle 50 50 30 20
-square 50 50 50
-polygon 3 1 2 56 57 89 69
-line 45 35 67 89
-ellipse 258 256 56 34
-circle 144 155 55
+rectangle 50 50 30 20 red green
+square 50 50 50 blue red
+polygon 3 1 2 56 57 89 69 red blue
+line 45 35 67 89 green red
+ellipse 258 256 56 34 blue magenta
+circle 144 155 55 magenta lightblue
 endprogram 
