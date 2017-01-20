@@ -22,32 +22,6 @@ void rect(int x,int y,int l,int b,int fc,int bkc){
    return ;
 }
 
-
-
-
-// void poly(int n, int points[],int fc,int bkc)
-// {
-//    int gd=DETECT,gm,sumx=0,sumy=0,i;
- 
-//    initgraph(&gd, &gm, "C:\\TC\\BGI");
- 
-   
-//    setbkcolor(bkc);
-//    setcolor(fc);
-//    drawpoly(n, points);
-
-//    for(i=0;i<2*n-1;i+=2){
-//       sumx+=points[i];
-//       sumy+=points[i+1];
-//    }
-//    sumx/=n;
-//    sumy/=n;
-//    floodfill(sumx/2,sumy/2,fc);
-//    getch();
-//    closegraph();
-//    return ;
-// }
-
 void poly(int n, int points[])
 {
    int gd=DETECT,gm,sumx=0,sumy=0,i;
@@ -128,6 +102,8 @@ void circ(int x,int y,int r,int fc,int bkc)
 
 //      LIGHTRED       LIGHTMAGENTA  YELLOW        WHITE
 
+//this is used to convert color strings to numbers
+
 int getcnum(char *str){
    if(!strcmp(str,"black")){
       return 0;
@@ -182,98 +158,108 @@ int getcnum(char *str){
 
 int main(){
 	FILE *fp;
-   	char buff[255];
+   	
+      char buff[255];
    	int x,y,l,b,n,i,r,fc,bkc;
 
    	fp = fopen("/home/surya/graphics-editor-in-c/input.txt", "r");
-   	/*fscanf(fp, "%s", buff);
-   	printf("1 : %s\n", buff );
 
-   	fgets(buff, 255, (FILE*)fp);
-   	printf("2: %s\n", buff );
+      int gd = DETECT, gm;
    
-   	fgets(buff, 255, (FILE*)fp);
-   	printf("3: %s\n", buff );
-   	fclose(fp);*/
-      
+      initgraph(&gd, &gm, "C:\\TC\\BGI");
 
 
    	while(1){
          
    		fscanf(fp,"%s",buff);
+         if(!strcmp(buff,"setcolor")){
+            //here color is taken as input to set the color which your floodfill uses
+            fscanf(fp,"%s",buff);
+            setcolor(getcnum(buff));
+
+         }
+
    		if(!strcmp(buff,"rectangle")){
-   			//here x,y - are coordinates of topleft corner of rectangle l,b- are length and breadth
-   			fscanf(fp," %d %d %d %d",&x,&y,&l,&b);
-            fscanf(fp,"%s",buff);
-            fc=getcnum(buff);
-            fscanf(fp,"%s",buff);
-            bkc=getcnum(buff);
-   			rect(x,y,x+l,y+b,fc,bkc);
-            // outtextxy(0, 0, "Press any button to exit");
+   			
+            //here x,y - are coordinates of topleft corner of rectangle l,b- are length and breadth
+   			
+            fscanf(fp," %d %d %d %d",&x,&y,&l,&b);
+            
+            rectangle(x,y,x+l,y+b);
+
    		}
    		
    		if(!strcmp(buff,"square")){
-   			//user need to enter the coordinates of topleft corner and side length
-   			fscanf(fp," %d %d %d ",&x,&y,&l);
+   			
+            //user need to enter the coordinates of topleft corner and side length
+   			
+            fscanf(fp," %d %d %d ",&x,&y,&l);
             fscanf(fp,"%s",buff);
-            fc=getcnum(buff);
-            fscanf(fp,"%s",buff);
-            bkc=getcnum(buff);
-   			rect(x,y,x+l,y+l,fc,bkc);
+            
+            rectangle(x,y,x+l,y+l);
+
    		}
 
    		if(!strcmp(buff,"polygon")){
-   			// user need to enter n- number of points, 
-   			fscanf(fp," %d ",&n);
+   			
+            // user need to enter n- number of points, 
+   			
+            fscanf(fp," %d ",&n);
+            
             int tmp[2*n+2];
+            
             for(i=0;i<=2*n-1;i++){
                fscanf(fp,"%d",tmp+i);
             }
+            
             tmp[2*n]=tmp[0];
             tmp[2*n+1]=tmp[1];
-            fscanf(fp,"%s",buff);
-            fc=getcnum(buff);
-            fscanf(fp,"%s",buff);
-            bkc=getcnum(buff);
-            poly(n,tmp,fc,bkc);
+
+            drawpoly(n+1, tmp);
    		}
          if(!strcmp(buff,"line")){
+            
             // user should enter coordinates of both ends
+            
             fscanf(fp," %d %d %d %d",&x,&y,&l,&b);
-            fscanf(fp,"%s",buff);
-            fc=getcnum(buff);
-            fscanf(fp,"%s",buff);
-            bkc=getcnum(buff);
-            lin(x,y,l,b,fc,bkc);
+           
+            line(x,y,l,b);
+
          }
          if(!strcmp(buff,"ellipse")){
+            
             // user should enter coordinates of center, x-radius , y-radius
+            
             fscanf(fp," %d %d %d %d",&x,&y,&l,&b);
-            fscanf(fp,"%s",buff);
-            fc=getcnum(buff);
-            fscanf(fp,"%s",buff);
-            bkc=getcnum(buff);
-            ellpse(x,y,l,b,fc,bkc) ;
+            
+            ellipse(x, y, 0, 360, l, b);
+          
          }
-         // if (!strcmp(buff,"setbackground")){
-         //    // user should enter the number corresponding to the color he wants to set the background to
-         //    fscanf(fp," %d",&n);
-         //    setbkcolor(GREEN);
-         // }
-         // if (!strcmp(buff,"closegraph")){
-         //    clsgraph()
-         // }
+
          if(!strcmp(buff,"circle")){
+            
             // user should enter coordinates of center, x-radius , y-radius
+            
             fscanf(fp," %d %d %d",&x,&y,&r);
-            fscanf(fp,"%s",buff);
-            fc=getcnum(buff);
-            fscanf(fp,"%s",buff);
-            bkc=getcnum(buff);
-            circ(x,y,r,fc,bkc) ;
+           
+            circle(x,y,r);
+
          }
          if (!strcmp(buff,"endprogram")){
+            
+            getch();
+            
+            closegraph();
+            
             break;
+         }
+         if (!strcmp(buff,"fillcolor")){
+
+            fscanf(fp," %s %d %d",buff,&x,&y);
+
+            floodfill(x,y,getcnum(buff));
+
+            fscanf(fp,"%s",buff);
          }
    	}
       return 0;
