@@ -30,19 +30,19 @@ main()
    return 0;
 }
 */
-#include<graphics.h>
+#include <graphics.h>
  
-main()
-{
+
+void main(){
+   int x=50,int y=60,int l=90,int b=100,int fc=,int bkc;
    int gd = DETECT, gm;
+   
    initgraph(&gd, &gm, "C:\\TC\\BGI");
- 
-   outtext("Press any key to change the background color to GREEN.");
-   getch();
- 
-   setbkcolor(2);
- 
+   setbkcolor(bkc);
+   setcolor(fc);
+   rectangle(x,y,l,b);
+   floodfill(100,100,fc);
    getch();
    closegraph();
-   return 0;
+   return ;
 }

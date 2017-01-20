@@ -16,14 +16,15 @@
 //      LIGHTRED       LIGHTMAGENTA  YELLOW        WHITE
 
 
-void rect(int x,int y,int l,int b){
+void rect(int x,int y,int l,int b,int fc,int bkc){
 
    int gd = DETECT, gm;
- 
+   
    initgraph(&gd, &gm, "C:\\TC\\BGI");
- 
+   setbkcolor(bkc);
+   setcolor(fc);
    rectangle(x,y,l,b);
- 
+   floodfill(100,100,fc);
    getch();
    closegraph();
    return ;
